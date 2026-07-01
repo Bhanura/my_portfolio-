@@ -2,13 +2,13 @@
    globals.css  — Base styles, design tokens, and animations
    ──────────────────────────────────────────────────────── */
 
-/* 1. Tailwind directives */
+/* 1. Google Fonts — Inter (UI) + JetBrains Mono (code) */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap');
+
+/* 2. Tailwind directives */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
-/* 2. Google Fonts — Inter (UI) + JetBrains Mono (code) */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap');
 
 /* ─── 3. CSS Custom Properties ──────────────────────────────────────────── */
 :root {
