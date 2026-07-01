@@ -1,0 +1,224 @@
+/* ─────────────────────────────────────────────────────────
+   globals.css  — Base styles, design tokens, and animations
+   ──────────────────────────────────────────────────────── */
+
+/* 1. Tailwind directives */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* 2. Google Fonts — Inter (UI) + JetBrains Mono (code) */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap');
+
+/* ─── 3. CSS Custom Properties ──────────────────────────────────────────── */
+:root {
+  /* Background system */
+  --bg-base:    #0A0A0A;
+  --bg-raised:  #111111;
+  --bg-overlay: #1A1A1A;
+  --bg-border:  #2E2E2E;
+
+  /* Brand accent (Supabase green) */
+  --brand:      #3ECF8E;
+  --brand-dark: #249169;
+  --brand-glow: rgba(62, 207, 142, 0.2);
+
+  /* Text */
+  --text-primary:   #EDEDED;
+  --text-secondary: #A1A1A1;
+  --text-muted:     #666666;
+
+  /* Navbar height — used for scroll offset */
+  --navbar-h: 64px;
+}
+
+/* ─── 4. Base Resets ─────────────────────────────────────────────────────── */
+html {
+  /* Smooth scroll for anchor links (e.g., #contact) */
+  scroll-behavior: smooth;
+  scroll-padding-top: var(--navbar-h);
+  font-family: 'Inter', system-ui, sans-serif;
+}
+
+body {
+  background-color: var(--bg-base);
+  color: var(--text-primary);
+  /* Prevent horizontal scrollbar from layout blobs */
+  overflow-x: hidden;
+}
+
+/* ─── 5. Custom Scrollbar (thin, branded) ───────────────────────────────── */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: var(--bg-raised);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--bg-border);
+  border-radius: 999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--brand);
+}
+
+/* ─── 6. Selection Color ─────────────────────────────────────────────────── */
+::selection {
+  background: var(--brand-glow);
+  color: var(--brand);
+}
+
+/* ─── 7. Reusable Component Layer ───────────────────────────────────────── */
+@layer components {
+
+  /* Glass card — translucent surface used throughout the UI */
+  .glass-card {
+    background: rgba(26, 26, 26, 0.7);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 12px;
+  }
+
+  /* Glowing border ring around the profile photo */
+  .avatar-ring {
+    background: conic-gradient(
+      from 0deg,
+      #3ECF8E,
+      #249169,
+      #1a5c3d,
+      #3ECF8E
+    );
+    border-radius: 50%;
+    padding: 3px;
+  }
+
+  /* Brand-coloured gradient text */
+  .text-gradient {
+    background: linear-gradient(135deg, #3ECF8E 0%, #68d9a9 50%, #EDEDED 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  /* Subtle grid overlay for hero backgrounds */
+  .bg-grid {
+    background-image: linear-gradient(rgba(62, 207, 142, 0.03) 1px, transparent 1px),
+                      linear-gradient(90deg, rgba(62, 207, 142, 0.03) 1px, transparent 1px);
+    background-size: 40px 40px;
+  }
+
+  /* Pill-style tech badge */
+  .tech-badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 4px 12px;
+    border-radius: 999px;
+    font-size: 0.75rem;
+    font-weight: 500;
+    background: rgba(62, 207, 142, 0.08);
+    color: #3ECF8E;
+    border: 1px solid rgba(62, 207, 142, 0.2);
+    transition: all 0.2s ease;
+  }
+  .tech-badge:hover {
+    background: rgba(62, 207, 142, 0.15);
+    border-color: rgba(62, 207, 142, 0.4);
+  }
+
+  /* Primary action button */
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 24px;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    background: #3ECF8E;
+    color: #0A0A0A;
+    transition: all 0.2s ease;
+    border: 1px solid transparent;
+  }
+  .btn-primary:hover {
+    background: #249169;
+    box-shadow: 0 0 30px rgba(62, 207, 142, 0.3);
+    transform: translateY(-1px);
+  }
+
+  /* Secondary/outline button */
+  .btn-secondary {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 24px;
+    border-radius: 8px;
+    font-weight: 500;
+    font-size: 0.9rem;
+    background: transparent;
+    color: var(--text-primary);
+    border: 1px solid var(--bg-border);
+    transition: all 0.2s ease;
+  }
+  .btn-secondary:hover {
+    border-color: #3ECF8E;
+    color: #3ECF8E;
+    background: rgba(62, 207, 142, 0.05);
+  }
+
+  /* Form input field */
+  .form-input {
+    width: 100%;
+    padding: 12px 16px;
+    background: var(--bg-raised);
+    border: 1px solid var(--bg-border);
+    border-radius: 8px;
+    color: var(--text-primary);
+    font-size: 0.9rem;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    outline: none;
+  }
+  .form-input::placeholder {
+    color: var(--text-muted);
+  }
+  .form-input:focus {
+    border-color: #3ECF8E;
+    box-shadow: 0 0 0 3px rgba(62, 207, 142, 0.1);
+  }
+}
+
+/* ─── 8. Keyframe Animations ─────────────────────────────────────────────── */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50%       { transform: translateY(-12px); }
+}
+
+@keyframes glowPulse {
+  0%, 100% { box-shadow: 0 0 20px rgba(62, 207, 142, 0.1); }
+  50%       { box-shadow: 0 0 50px rgba(62, 207, 142, 0.3); }
+}
+
+/* ─── 9. Staggered animation delays for children ────────────────────────── */
+.animate-delay-100 { animation-delay: 100ms; }
+.animate-delay-200 { animation-delay: 200ms; }
+.animate-delay-300 { animation-delay: 300ms; }
+.animate-delay-400 { animation-delay: 400ms; }
+.animate-delay-500 { animation-delay: 500ms; }
+.animate-delay-600 { animation-delay: 600ms; }
+.animate-delay-700 { animation-delay: 700ms; }
+
+/* Default to invisible so animations start from 0 */
+.animate-slide-up,
+.animate-fade-in {
+  opacity: 0;
+}
