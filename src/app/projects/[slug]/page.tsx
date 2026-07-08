@@ -95,11 +95,12 @@ export default async function ProjectDetailPage({
             </div>
           )}
 
-          {/* Description */}
           {project.description && (
-            <p className="text-xl text-[#A1A1A1] leading-relaxed mb-8">
-              {project.description}
-            </p>
+            <div className="prose prose-invert prose-lg max-w-none prose-p:text-xl prose-p:text-[#A1A1A1] prose-p:leading-relaxed mb-8 prose-headings:text-[#EDEDED] prose-headings:font-bold prose-a:text-[#3ECF8E]">
+              <ReactMarkdown remarkPlugins={[remarkGfm]}>
+                {project.description}
+              </ReactMarkdown>
+            </div>
           )}
 
           {/* Metadata row: links and repos */}
