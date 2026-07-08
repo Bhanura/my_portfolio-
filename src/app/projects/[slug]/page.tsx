@@ -27,18 +27,18 @@ export async function generateStaticParams() {
 // ── Formatting helper for time periods ──────────────────────────────────────
 function formatPeriod(start: string | null, end: string | null) {
   if (!start && !end) return null;
-  
+
   const formatDate = (dateStr: string) => {
     const d = new Date(dateStr);
     return d.toLocaleDateString('en-US', { month: 'short', year: 'numeric' });
   };
-  
+
   const startStr = start ? formatDate(start) : 'Unknown';
   const endStr = end ? formatDate(end) : 'Present';
-  
+
   // If start and end are exactly the same month/year, just return one
   if (startStr === endStr) return startStr;
-  
+
   return `${startStr} — ${endStr}`;
 }
 
@@ -105,7 +105,7 @@ export default async function ProjectDetailPage({
 
           {/* Metadata row: links and repos */}
           <div className="flex flex-wrap gap-4 items-center">
-            
+
             {/* Render all repositories */}
             {repos.map((repo: { name: string; url: string }, index: number) => (
               <a
@@ -136,26 +136,6 @@ export default async function ProjectDetailPage({
 
         {/* Divider */}
         <div className="border-t border-[#2E2E2E] mb-12" />
-
-        {/* ── Rich Text Content ────────────────────────────────────────────── */}
-        <div className="prose prose-invert prose-lg max-w-none
-          prose-headings:text-[#EDEDED] prose-headings:font-bold
-          prose-p:text-[#A1A1A1] prose-p:leading-relaxed
-          prose-a:text-[#3ECF8E] prose-a:no-underline hover:prose-a:underline
-          prose-strong:text-[#EDEDED]
-          prose-code:text-[#3ECF8E] prose-code:bg-[#111111] prose-code:px-1 prose-code:rounded
-          prose-pre:bg-[#111111] prose-pre:border prose-pre:border-[#2E2E2E]
-          prose-blockquote:border-[#3ECF8E] prose-blockquote:text-[#A1A1A1]
-          prose-hr:border-[#2E2E2E] mb-16
-        ">
-          {project.content ? (
-            <ReactMarkdown remarkPlugins={[remarkGfm]}>
-              {project.content}
-            </ReactMarkdown>
-          ) : (
-            <p className="text-[#666666] italic">No detailed write-up yet.</p>
-          )}
-        </div>
 
         {/* ── Bottom Media Gallery ─────────────────────────────────────────── */}
         {media.length > 0 && (
