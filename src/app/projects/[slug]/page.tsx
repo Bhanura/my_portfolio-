@@ -13,6 +13,8 @@ import { notFound } from 'next/navigation';
 import { Github, ExternalLink, Calendar, ArrowLeft, ImageIcon } from 'lucide-react';
 import Link from 'next/link';
 import Image from 'next/image';
+import ReactMarkdown from 'react-markdown';
+import remarkGfm from 'remark-gfm';
 
 // ── ISR: Revalidate every 60 seconds ──────────────────────────────────────────
 export const revalidate = 60;
@@ -146,7 +148,9 @@ export default async function ProjectDetailPage({
           prose-hr:border-[#2E2E2E] mb-16
         ">
           {project.content ? (
-            <div dangerouslySetInnerHTML={{ __html: project.content }} />
+            <ReactMarkdown remarkPlugins={[remarkGfm]}>
+              {project.content}
+            </ReactMarkdown>
           ) : (
             <p className="text-[#666666] italic">No detailed write-up yet.</p>
           )}
